@@ -39,8 +39,6 @@ const CountDown = () => {
         </>
         )
     }
-
-
       //if en el cual declaro si targetSecond deja de ser nulo (es decir, el usuario inició el cronometro), el interfaz cambiará
   
       if(targetSecond !== null){
