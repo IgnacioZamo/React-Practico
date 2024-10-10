@@ -4,8 +4,8 @@ import { Form, Formik, Field, ErrorMessage } from 'formik'
 const AppForm = () => {
   return (
     <Formik
-    initialValues={{message:"Ingrese su mensaje"}}
-    validate ={values =>{
+    initialValues={{message:"Ingrese su mensaje"}} //valor inicial
+    validate ={values =>{ //validate -> para indicar que un campo es obligatorio
       let errors = {};
       if(!values.name){
         errors.name="Este campo es requerido";
@@ -15,11 +15,32 @@ const AppForm = () => {
           errors.message="Este campo es requerido"
         }
         return errors;
+      }    
+    }
+    onSubmit={
+      (values, { setSubmitting })=>{   //VALUES = Funcion que sucederá, una vez se de al boton de submit || SETSUBMITTING = dispatch que cambiará de estado false a true 'isSubmitting', para controlar el boton al hacer submit
+        //console.log(values)
+        let url = "https://formspree.io/f/mvgopnwp"
+        let formData = new FormData();
+        formData.append("name",values.name);
+        formData.append("email",values.email);
+        formData.append("message",values.message);
+
+        fetch (url,{
+          method: "POST",
+          body: formData,
+          headers: {
+            'Accept': 'application/json'
+          }
+        }).then(response => {
+          setSubmitting(false);
+          alert("Su comentario ha sido enviado");
+        })
       }
     }
     >
       {
-        ({isSubmiting, values})=>(
+        ({isSubmitting, values})=>(
           <Form>
             <div>
               <label htmlFor="name">Nombre:</label>
@@ -33,9 +54,12 @@ const AppForm = () => {
             </div>
             <div>
               <label htmlFor="message">Comentario:</label>
-              <Field component="textarea" values={values.message} name="message"></Field>
+              <Field component="textarea" value={values.message} name="message"></Field>
               <ErrorMessage name="message" component="p"/>
             </div>
+            <button type='submit' disabled={isSubmitting}>
+              {isSubmitting ? "Enviado" : "Enviar mensaje"}
+            </button>
           </Form>
         )
       }
@@ -49,3 +73,5 @@ export default AppForm
 
 
 //se instaló la dependencia formik
+
+//formspree-cuenta: ignaciozamo1@gmail.com || pass= una mayuscula, caracter especial
