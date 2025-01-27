@@ -6,6 +6,7 @@ import Props from './assets/components/2-props/props'
 import Usesstate from "./assets/components/3-useState/usesstate"
 import IfTernario from "./assets/components/4-ifTernario/IfTernario"
 import MapIfTernario from "./assets/components/5-map-ifternario/MapIfTernario"
+import FetchUseEfect from "./assets/components/6-Fetch-useEfect-listUsuarios/Fetch-useEfect"
 
 
 createRoot(document.getElementById('root')).render(
@@ -16,6 +17,7 @@ createRoot(document.getElementById('root')).render(
       <Usesstate value={10}/>
       <IfTernario/>
       <MapIfTernario/>
+      <FetchUseEfect/>
     </div>
   </StrictMode>
 )
