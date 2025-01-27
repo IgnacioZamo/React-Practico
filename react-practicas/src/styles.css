@@ -1,0 +1,13 @@
+body,html {
+    padding: 1%;
+}
+
+.carpeta{
+    display: flex;
+    flex-direction:column;
+    gap: 2rem;
+}
+
+h1{
+    font-family:'Times New Roman', Times, serif
+}
