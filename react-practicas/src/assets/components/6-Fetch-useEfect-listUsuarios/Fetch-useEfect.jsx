@@ -1,26 +1,30 @@
-import { useState } from "react"
-
-useState
+import { useState, useEffect } from "react"
 
 const FetchUseEfect = () => {
 
-const [user, setUser] = useState([])
+const [users, setUser] = useState([])
 
 const fetchUsers = async ()=> {
     try {
         const response = await fetch ('https://jsonplaceholder.typicode.com/users')
-        const data = response.json();
-        console.log(data)
+        const data = await response.json();
         setUser(data)
         
-    } catch (error) {
+      } catch (error) {
         console.error(error)
+      }
     }
-}
-
-
+    useEffect(() => {
+      fetchUsers();
+    }, [])
+  
   return (
-    <div>Fetch-useEfect</div>
+    <div>
+      <h1>Fetch - useEfect</h1>
+      <ol>
+        {users.map(user => <li key={user.id}>{user.name} | {user.address.zipcode}</li>)}
+      </ol>
+    </div>
   )
 }
 
